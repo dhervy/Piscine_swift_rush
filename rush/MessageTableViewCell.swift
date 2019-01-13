@@ -12,6 +12,7 @@ class MessageTableViewCell: UITableViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var messageLabel: UILabel!
+    @IBOutlet weak var countLabel: UILabel!
     
     var message: Message? {
         didSet {
@@ -22,5 +23,17 @@ class MessageTableViewCell: UITableViewCell {
             }
         }
     }
-
+    
+    var countResponse: Int? {
+        didSet {
+            if let count = countResponse {
+                if count > 0 {
+                    countLabel?.text = String(count)
+                } else {
+                    countLabel?.text = "0"
+                    countLabel?.isHidden = true
+                }
+            }
+        }
+    }
 }

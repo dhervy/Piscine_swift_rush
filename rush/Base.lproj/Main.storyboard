@@ -73,7 +73,13 @@
                             <outlet property="delegate" destination="IDg-td-p9K" id="CxK-OS-qAu"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Topics" id="7nq-qk-EP1"/>
+                    <navigationItem key="navigationItem" title="Topics" id="7nq-qk-EP1">
+                        <barButtonItem key="leftBarButtonItem" title="Logout" id="KyZ-BB-rgf">
+                            <connections>
+                                <action selector="logoutButton:" destination="IDg-td-p9K" id="Zhp-af-61N"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8OR-JM-dJK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -96,39 +102,53 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="Nq0-Ht-27x">
-                                            <rect key="frame" x="15" y="15" width="150" height="21"/>
+                                            <rect key="frame" x="15" y="20" width="150" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="KIe-3p-XWO">
-                                            <rect key="frame" x="210" y="15" width="150" height="21"/>
+                                            <rect key="frame" x="210" y="20" width="150" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Message" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A9M-U0-46Y">
-                                            <rect key="frame" x="19" y="51" width="337.5" height="60.5"/>
+                                            <rect key="frame" x="19" y="56" width="337.5" height="55.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wpL-bM-5d4">
+                                            <rect key="frame" x="355" y="0.0" width="20" height="20"/>
+                                            <color key="backgroundColor" red="1" green="0.11875027248169667" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="20" id="JbB-MH-YcT"/>
+                                                <constraint firstAttribute="width" constant="20" id="XlS-b0-I7l"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="italicSystem" pointSize="20"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="Nq0-Ht-27x" firstAttribute="top" secondItem="a6u-fx-6Zr" secondAttribute="top" constant="15" id="Cx2-Vz-z10"/>
+                                        <constraint firstItem="wpL-bM-5d4" firstAttribute="top" secondItem="a6u-fx-6Zr" secondAttribute="top" id="4Gj-DC-dxj"/>
+                                        <constraint firstItem="Nq0-Ht-27x" firstAttribute="top" secondItem="a6u-fx-6Zr" secondAttribute="top" constant="20" id="Cx2-Vz-z10"/>
                                         <constraint firstAttribute="trailing" secondItem="KIe-3p-XWO" secondAttribute="trailing" constant="15" id="E4q-nz-Phf"/>
                                         <constraint firstAttribute="bottom" secondItem="A9M-U0-46Y" secondAttribute="bottom" constant="5" id="KX5-90-l9h"/>
                                         <constraint firstItem="A9M-U0-46Y" firstAttribute="centerX" secondItem="a6u-fx-6Zr" secondAttribute="centerX" id="LnS-Kk-Euh"/>
                                         <constraint firstItem="KIe-3p-XWO" firstAttribute="centerY" secondItem="Nq0-Ht-27x" secondAttribute="centerY" id="Mt1-QE-bBw"/>
                                         <constraint firstItem="A9M-U0-46Y" firstAttribute="width" secondItem="a6u-fx-6Zr" secondAttribute="width" multiplier="0.9" id="SDS-qK-S2g"/>
                                         <constraint firstItem="Nq0-Ht-27x" firstAttribute="leading" secondItem="a6u-fx-6Zr" secondAttribute="leading" constant="15" id="YUx-Ys-GHN"/>
-                                        <constraint firstItem="KIe-3p-XWO" firstAttribute="top" secondItem="a6u-fx-6Zr" secondAttribute="top" constant="15" id="ZcY-cY-veM"/>
+                                        <constraint firstItem="KIe-3p-XWO" firstAttribute="top" secondItem="a6u-fx-6Zr" secondAttribute="top" constant="20" id="ZcY-cY-veM"/>
                                         <constraint firstItem="KIe-3p-XWO" firstAttribute="width" secondItem="a6u-fx-6Zr" secondAttribute="width" multiplier="0.4" id="o88-wd-SFf"/>
                                         <constraint firstItem="Nq0-Ht-27x" firstAttribute="width" secondItem="a6u-fx-6Zr" secondAttribute="width" multiplier="0.4" id="oM6-tZ-udt"/>
                                         <constraint firstItem="A9M-U0-46Y" firstAttribute="top" secondItem="Nq0-Ht-27x" secondAttribute="bottom" constant="15" id="wDW-id-3Yi"/>
+                                        <constraint firstAttribute="trailing" secondItem="wpL-bM-5d4" secondAttribute="trailing" id="xHk-9l-VqG"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="countLabel" destination="wpL-bM-5d4" id="l0n-3L-QjI"/>
                                     <outlet property="dateLabel" destination="KIe-3p-XWO" id="b7t-Qe-TyZ"/>
                                     <outlet property="messageLabel" destination="A9M-U0-46Y" id="3vA-Cp-hPc"/>
                                     <outlet property="nameLabel" destination="Nq0-Ht-27x" id="icv-he-2GP"/>

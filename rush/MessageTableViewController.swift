@@ -42,7 +42,6 @@ class MessageTableViewController: UITableViewController {
 
                                     if let test = results as? [NSDictionary] {
                                         for value in test {
-                                            print("\n\n\nValue : \(value)\n\n\n")
                                             if let date = value["created_at"] as? String,
                                                 let nameDic = value["author"] as? NSDictionary,
                                                 let message = value["content"] as? String,
@@ -78,8 +77,6 @@ class MessageTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        print("\n\n\n\n\n\nDEBUG TA MERE\n\n\n\(messages)\n")
         if messages.count > 0 {
             return messages.count
         }
@@ -94,9 +91,11 @@ class MessageTableViewController: UITableViewController {
         
         if (messages.count == 0) {
             cell.message = Message(name: "Loading...", date:"", message:"", id:0, authorId: 0, replies: [])
+            cell.countResponse = 0
         }
         else {
             cell.message = messages[indexPath.row]
+            cell.countResponse = messages[indexPath.row].replies.count
         }
         return cell
     }
@@ -128,7 +127,6 @@ class MessageTableViewController: UITableViewController {
                     }
                 
                     vc.responses = replies
-                    //                vc.id = (send.message?.id)!
                 }
             }
         }

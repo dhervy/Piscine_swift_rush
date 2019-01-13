@@ -59,7 +59,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
         
         if let code = getQueryParams(url: url, param: "code") {
-            print(code)
             if let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "tableViewController") as? TableViewController {
                 controller.code = code
                 if let window = self.window, let rootViewController = window.rootViewController as? UINavigationController {

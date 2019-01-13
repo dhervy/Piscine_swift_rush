@@ -23,8 +23,6 @@ class ResponseTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        print("\n\n\n\n\n\nDEBUG TA MERE\n\n\n\(responses)\n")
         if responses.count > 0 {
             return responses.count
         }
@@ -38,7 +36,7 @@ class ResponseTableViewController: UITableViewController {
         //Configure the cell...
         
         if (responses.count == 0) {
-            cell.response = Response(name: "Loading...", date:"", response:"", id:0, authorId: 0)
+            cell.response = Response(name: "Aucune réponse", date:"", response:"", id:0, authorId: 0)
         }
         else {
             cell.response = responses[indexPath.row]

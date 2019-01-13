@@ -10,7 +10,19 @@ import UIKit
 import WebKit
 
 class TableViewController: UITableViewController {
-
+    @IBAction func logoutButton(_ sender: Any) {
+        self.token = nil
+        self.code = nil
+        self.Topics = []
+        URLCache.shared.removeAllCachedResponses()
+        if let cookies = HTTPCookieStorage.shared.cookies {
+            for cookie in cookies {
+                HTTPCookieStorage.shared.deleteCookie(cookie)
+            }
+        }
+        UIApplication.shared.keyWindow?.rootViewController = storyboard!.instantiateInitialViewController()
+    }
+    
     let CLIENT_ID = "8c02ab138031f17e45b8a15535ccd24ec6cb2b284afc3292d2609673e3475d68"
     let CLIENT_SECRET = "21beb4e33cfac13ee077cc9877cbe548b689b4893f032a9c3e3fb17a1aeb0a7e"
     
@@ -22,20 +34,21 @@ class TableViewController: UITableViewController {
     }
     
     var Topics: [Topic] = []
-    var code: String?{
+    var code: String? {
         didSet {
-            getToken()
+            if code != nil {
+                getToken()
+            }
         }
     }
     var token: String? {
         didSet {
-            DispatchQueue.main.async {
-                self.navigationController?.isNavigationBarHidden = false
+            if token != nil {
+                DispatchQueue.main.async {
+                    self.navigationController?.isNavigationBarHidden = false
+                }
+                getTopic()
             }
-            getTopic()
-//            getTopic()
-//            User = UserInfo(token: token!, scheme: scheme, host: host)
-//            User?.getUserInfo()
         }
     }
     
@@ -122,7 +135,6 @@ class TableViewController: UITableViewController {
                 if let d = data {
                     do {
                         if let dic : NSDictionary = try JSONSerialization.jsonObject(with: d, options: JSONSerialization.ReadingOptions.mutableContainers) as? NSDictionary {
-                            print("\n\n\(dic)\n\n")
                             if let access_token = dic["access_token"] as? String {
                                 self.token = access_token
                             } else {
