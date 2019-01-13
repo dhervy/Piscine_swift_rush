@@ -32,12 +32,55 @@ class TableViewController: UITableViewController {
             DispatchQueue.main.async {
                 self.navigationController?.isNavigationBarHidden = false
             }
-            print(token)
-            print("On get topic")
+            getTopic()
 //            getTopic()
 //            User = UserInfo(token: token!, scheme: scheme, host: host)
 //            User?.getUserInfo()
         }
+    }
+    
+    func getTopic() {
+        var urlComponent = URLComponents(string: "https://api.intra.42.fr/v2/topics")!
+        
+        urlComponent.percentEncodedQuery = urlComponent.percentEncodedQuery?.replacingOccurrences(of: "+", with: "%2B")
+        
+        if let url = urlComponent.url {
+            var request = URLRequest(url:url)
+            request.httpMethod = "GET"
+            request.setValue("Bearer " + token!, forHTTPHeaderField: "Authorization")
+            URLSession.shared.dataTask(with: request as URLRequest) {
+                (data, response, error) in
+                if let error = error {
+                    print("API GET", error)
+                }
+                if let d = data {
+                    do {
+                        if let results: NSArray = try JSONSerialization .jsonObject(with: d, options: JSONSerialization.ReadingOptions.allowFragments  ) as? NSArray {
+                            if let test = results as? [NSDictionary] {
+                                
+                                for value in test{
+                                    if let date = value["created_at"] as? String,
+                                        let nameDic = value["author"] as? NSDictionary,
+                                        let topic = value["name"] as? String,
+                                        let id = value["id"] as? Int,
+                                        let name = nameDic["login"] as? String {
+                                            self.Topics.append(Topic(name: name, date: date, topic: topic, id: id, authorId: 0))
+                                        }
+                                }
+                                DispatchQueue.main.async {
+                                    self.tableView.reloadData()
+                                }
+                            }
+                        }
+                    } catch let err {
+                        print("parse Error \(err)")
+                    }
+                }
+                }.resume()
+        } else {
+            print("Fail to create url")
+        }
+        
     }
     
     func getAuth() {
@@ -149,6 +192,16 @@ class TableViewController: UITableViewController {
             tableView.deleteRows(at: [indexPath], with: .fade)
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "MessageSegue" {
+            if let vc = segue.destination as? MessageTableViewController,
+                let send = sender as? TableViewCell {
+                    vc.token = self.token!
+                    vc.id = (send.topic?.id)!
+            }
         }
     }
 
