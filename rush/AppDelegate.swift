@@ -60,13 +60,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if let code = getQueryParams(url: url, param: "code") {
             print(code)
-            let mainStoryboard:UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-            if let viewController = mainStoryboard.instantiateViewController(withIdentifier: "viewController") as? ViewController {
-                viewController.code = code
-                viewController.testLabel.text = "toto"
+            if let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "tableViewController") as? TableViewController {
+                controller.code = code
                 if let window = self.window, let rootViewController = window.rootViewController as? UINavigationController {
-                    var currentController = rootViewController
-                    currentController.pushViewController(viewController, animated: true)
+                    let currentController = rootViewController
+                    currentController.pushViewController(controller, animated: true)
                 }
             }
         }
