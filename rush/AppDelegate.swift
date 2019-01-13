@@ -28,6 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
     }
+    
 
     func applicationWillEnterForeground(_ application: UIApplication) {
         // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
@@ -60,17 +61,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if let code = getQueryParams(url: url, param: "code") {
             print(code)
             let mainStoryboard:UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-            if let myViewController = mainStoryboard.instantiateViewController(withIdentifier: "viewController") as? ViewController {
-                
-
-                print("something")
-                let button = myViewController.testLabel
-                print("something")
-                print(button)
-                myViewController.testLabel?.text = code
-                print(button?.text)
+            if let viewController = mainStoryboard.instantiateViewController(withIdentifier: "viewController") as? ViewController {
+                viewController.code = code
+                viewController.testLabel.text = "toto"
+                if let window = self.window, let rootViewController = window.rootViewController as? UINavigationController {
+                    var currentController = rootViewController
+                    currentController.pushViewController(viewController, animated: true)
+                }
             }
         }
         return true
     }
+    
 }

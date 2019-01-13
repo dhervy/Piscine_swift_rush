@@ -11,17 +11,20 @@ import WebKit
 
 class ViewController: UIViewController, WKUIDelegate {
     
-//    var webView: WKWebView!
+    var webView: WKWebView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        let webConfigutation = WKWebViewConfiguration()
-//        webView = WKWebView(frame: .zero, configuration: webConfigutation)
-//        webView.uiDelegate = self
-//        view = webView
-        getAuth()
+        let webConfigutation = WKWebViewConfiguration()
+        webView = WKWebView(frame: .zero, configuration: webConfigutation)
+        webView.uiDelegate = self
+        view = webView
+        if self.code == nil {
+            getAuth()
+        }
     }
     @IBOutlet weak var testLabel: UILabel!
+    var code: String?
     
     func getAuth() {
         let CLIENT_ID = "8c02ab138031f17e45b8a15535ccd24ec6cb2b284afc3292d2609673e3475d68"
